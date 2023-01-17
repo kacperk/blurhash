@@ -6,6 +6,8 @@ require 'blurhash_ext'
 module Blurhash
   def self.encode(width, height, pixels, x_comp: 4, y_comp: 3)
     p = pixels.pack("C#{pixels.size}")
+    raise ArgumentError("Not RGB bytes") if pixels.size < width*height*3
+
     return Unstable.blurHashForPixels(x_comp, y_comp, width, height, p)
   end
 
